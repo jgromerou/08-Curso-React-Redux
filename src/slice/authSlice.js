@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialAuthState = {
   id: 1,
-  name: 'Nike Air',
+  name: 'Jesus',
+  isLogged: false,
 };
 
 export const authSlice = createSlice({

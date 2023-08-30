@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialProductState = {
-  id: 1,
-  name: 'Nike Air',
+  isLoading: false,
+  data: [],
 };
 
 export const productSlice = createSlice({
@@ -10,14 +10,24 @@ export const productSlice = createSlice({
   initialState: initialProductState, //los datos iniciales
   reducers: {
     //son las acciones
-    createProduct: (state) => {
-      //Lógica de los cambios de estados para el crear nuevo producto
+
+    isLoadingProduct: (state) => {
+      state.isLoading = true;
     },
 
-    deleteProduct: (state) => {
-      //Lógica de los cambios de estados para el eliminar producto
+    setProducts: (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload.data;
     },
+
+    // createProduct: (state) => {
+    //   //Lógica de los cambios de estados para el crear nuevo producto
+    // },
+
+    // deleteProduct: (state) => {
+    //   //Lógica de los cambios de estados para el eliminar producto
+    // },
   },
 });
 
-export const { createProduct, deleteProduct } = productSlice.actions;
+export const { isLoadingProduct, setProducts } = productSlice.actions;

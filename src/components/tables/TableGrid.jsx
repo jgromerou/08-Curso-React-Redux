@@ -2,13 +2,18 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
-  { field: 'id', headerName: 'ID', flex: 0.25},
-  { field: 'firstName', headerName: 'First name', flex: 1 },
-  { field: 'lastName', headerName: 'Last name', flex: 1 },
-  { field: 'age', headerName: 'Age', flex: 0.5},
-  { field: 'fullName', headerName: 'Full name', sortable: false, flex: 1.5,valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+  { field: 'id', headerName: 'ID', flex: 0.25 },
+  { field: 'title', headerName: 'Product', flex: 1 },
+  { field: 'category', headerName: 'Category', flex: 1 },
+  { field: 'price', headerName: 'Price', flex: 0.5 },
+  // {
+  //   field: 'fullName',
+  //   headerName: 'Full name',
+  //   sortable: false,
+  //   flex: 1.5,
+  //   valueGetter: (params) =>
+  //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  // },
 ];
 
 const rows = [
@@ -23,33 +28,32 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export const TableGrid = () => {
-
+export const TableGrid = ({ dataRows }) => {
   return (
     <div style={{ height: 600, width: '100%' }}>
       <DataGrid
         width={'100%'}
-        rows={rows}
+        rows={dataRows}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[5, 10,25]}
+        pageSizeOptions={[5, 10, 25]}
         checkboxSelection
         sx={{
-            boxShadow: 2,
-            '& .MuiDataGrid-cell:hover': {
-              color: 'primary.main',
-            },
-            '& .MuiDataGrid-columnHeader': {
-                fontSize: 15,
-                color: 'black',
-                backgroundColor: '#d4dcff'
-            }
-          }}
+          boxShadow: 2,
+          '& .MuiDataGrid-cell:hover': {
+            color: 'primary.main',
+          },
+          '& .MuiDataGrid-columnHeader': {
+            fontSize: 15,
+            color: 'black',
+            backgroundColor: '#d4dcff',
+          },
+        }}
       />
     </div>
   );
-}
+};
