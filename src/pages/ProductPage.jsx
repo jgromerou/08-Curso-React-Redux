@@ -6,8 +6,9 @@ import { TableGrid } from '../components/tables/TableGrid';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoadingProduct, setProducts } from '../slice/productSlice';
+import { isLoadingProduct, setProducts } from '../slice/products/productSlice';
 import { dataProducts } from '../data/dataProducts';
+import { getProducts } from '../slice/products/thunksProduct';
 
 export const ProductPage = () => {
   const { data } = useSelector((state) => state.products);
@@ -17,7 +18,8 @@ export const ProductPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProducts({ data: dataProducts }));
+    dispatch(getProducts());
+    // dispatch(setProducts({ data: dataProducts }));
   }, []);
 
   return (

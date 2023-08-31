@@ -16,7 +16,7 @@ export const productSlice = createSlice({
     },
 
     setProducts: (state, action) => {
-      state.isLoading = false;
+      state.isLoading = action.payload.isLoading;
       state.data = action.payload.data;
     },
 

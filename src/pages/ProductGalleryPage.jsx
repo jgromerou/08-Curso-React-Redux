@@ -1,48 +1,65 @@
-import React from 'react';
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
-import { dataProducts } from '../data/dataProducts';
+//import { dataProducts } from '../data/dataProducts';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../slice/products/thunksProduct';
 
 export const ProductGalleryPage = () => {
+  const { data } = useSelector((state) => state.products);
+  console.log(data);
 
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
   return (
     <Box>
-        <Grid container spacing={4}>
-        { dataProducts.map((prd) => (
-            <Grid key={prd.id} item  xs={12} sm={6} md={4}>
-                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <CardMedia
-                    component="div"
-                    sx={{
-                    // 16:9
-                    pt: '100%',
-                    }}
-                    image={`/productos/${ prd.img }`}
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {prd.title}
-                    </Typography>
-                    <Typography>
-                        {prd.detail}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button  
-                        size="large" 
-                        startIcon={<ThumbUpIcon/>}
-                        variant='contained'
-                        style={{ justifyContent: 'center', alignContent:'center'}}
-                    >
-                        0
-                    </Button>
-                </CardActions>
-                </Card>
-            </Grid>
+      <Grid container spacing={4}>
+        {data.map((prd) => (
+          <Grid key={prd.id} item xs={12} sm={6} md={4}>
+            <Card
+              sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+            >
+              <CardMedia
+                component="div"
+                sx={{
+                  // 16:9
+                  pt: '100%',
+                }}
+                image={prd.image}
+              />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {prd.title}
+                </Typography>
+                <Typography>{prd.description}</Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  size="large"
+                  startIcon={<ThumbUpIcon />}
+                  variant="contained"
+                  style={{ justifyContent: 'center', alignContent: 'center' }}
+                >
+                  0
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
         ))}
-        </Grid>
+      </Grid>
     </Box>
-  )
-}
+  );
+};
